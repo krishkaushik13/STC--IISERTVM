@@ -21,7 +21,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1; /* Puts it behind all other content */
+    z-index: -4; /* Puts it behind all other content */
     background-color: #f8f7ff; /* The background color of the animation */
 }
 
