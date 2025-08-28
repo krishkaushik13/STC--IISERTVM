@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STC Clubs - Science and Tech Council</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Your original stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* CSS Variables from your main stylesheet */
+        :root {
+            --purple: #4A2E7A;
+            --blue: #6AC5F2;
+            --white: #FFFFFF;
+            --off-white: #f8f7ff; /* A slightly purplish off-white */
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        /* General styling for the clubs page */
+        body {
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .clubs-container {
+            padding: 80px 20px;
+            min-height: calc(100vh - 160px); /* Adjust based on header/footer height */
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            color: var(--purple);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Grid layout for the cards */
+        .club-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Individual card styling */
+        .club-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            border: 1px solid #e0d8f0;
+            box-shadow: 0 8px 30px rgba(74, 46, 122, 0.08);
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            opacity: 0; /* Start hidden for the pop-in animation */
+            animation-fill-mode: forwards; /* Keep the final state of the animation */
+        }
+
+        /* Card hover effect */
+        .club-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 16px 40px rgba(74, 46, 122, 0.15);
+            border-color: var(--purple);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--purple);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        /* NEW: The pop-in animation */
+        @keyframes pop-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* The floating animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px); /* Reduced float for a subtler effect on light bg */
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Applying and staggering both animations */
+        .club-card:nth-child(1) {
+            animation: pop-in 0.5s ease-out 0.2s forwards, float 6s ease-in-out 1s infinite;
+        }
+        .club-card:nth-child(2) {
+            animation: pop-in 0.5s ease-out 0.4s forwards, float 6s ease-in-out 2.5s infinite;
+        }
+        .club-card:nth-child(3) {
+            animation: pop-in 0.5s ease-out 0.6s forwards, float 6s ease-in-out 4s infinite;
+        }
+        .club-card:nth-child(4) {
+            animation: pop-in 0.5s ease-out 0.8s forwards, float 6s ease-in-out 1.5s infinite;
+        }
+
+
+        /* --- FOOTER STYLES (from your main stylesheet) --- */
+        .site-footer {
+            background-color: var(--purple);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 60px 0 20px;
+            font-size: 15px;
+        }
+
+        .footer-container {
+            max-width: 1170px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-col {
+            width: 30%;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--blue);
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.1);
+            margin-right: 10px;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--blue);
+            color: var(--purple);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 20px 20px 0;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            .club-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-col {
+                width: 100%;
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reusing the same header for consistency -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"> <!-- Link back to home -->
+                    <img src="SNT_Logo[1].png" alt="STC Logo">
+                    <span>STC - Science and Technology Council</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About Us</a></li> <!-- Updated to link back to index sections -->
+                <li><a href="clubs.html">Clubs</a></li>
+                <li><a href="index.html#others">Others</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="clubs-container">
+            <h1 class="page-title">Our Clubs</h1>
+            <div class="club-grid">
+                
+                <!-- Card 1: Physics Society -->
+                <a href="psit.html" class="club-card">
+                    <div class="card-icon"><i class="fas fa-atom"></i></div>
+                    <h2 class="card-title">PSIT - Physics Society</h2>
+                    <p class="card-description">Exploring the universe, from quantum mechanics to cosmology.</p>
+                </a>
+
+                <!-- Card 2: Coding Club -->
+                <a href="ccit.html" class="club-card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h2 class="card-title">Coding Club</h2>
+                    <p class="card-description">Fostering a culture of programming, development, and innovation.</p>
+                </a>
+
+                <!-- Card 3: Electronics Club -->
+                <a href="#" class="club-card">
+                    <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                    <h2 class="card-title">Electronics Club</h2>
+                    <p class="card-description">Diving into circuits, robotics, and the Internet of Things (IoT).</p>
+                </a>
+
+                <!-- Card 4: Astronomy Club -->
+                <a href="#" class="club-card">
+                    <div class="card-icon"><i class="fas fa-star"></i></div>
+                    <h2 class="card-title">Astronomy Club</h2>
+                    <p class="card-description">Stargazing sessions, astrophotography, and cosmic discussions.</p>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer with updated styles -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>ABOUT STC - IISER TVM</h3>
+                <p>xyz</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="mailto:stc@iisertvm.ac.in">stc@iisertvm.ac.in</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 STC Science and Tech Council. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- You might need your script.js for the hamburger menu -->
+    <script src="script.js"></script>
+
+</body>
+</html>
